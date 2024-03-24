@@ -1,0 +1,30 @@
+Link to the design for a three server web infrastructure that hosts the website www.foobar.com
+========================================================================
+https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=1-distributed_web_infrastructure#R7Vpbc9o4FP41zHQfwshX4JFbW2YIkJA07dOOwcJoa1uuLALsr1%2FJlq%2FYgQZjJlvyEKQj6ehyPn3nSHJD6Tu7L8Tw1vfYhHZDBuauoQwasiypssJ%2BuGQfStpADQUWQaaolAjm6F8ohEBIN8iEfqYixdimyMsKl9h14ZJmZAYheJuttsJ2tlfPsOCBYL407EPpCzLpWsxCA4n8K0TWOupZAqLEMaLKQuCvDRNvUyJl2FD6BGMappxdH9p88aJ1Cdt9LimNB0agS09psBmNp3vyT28EeubDdDnT7b1zJ4daXg17IybckHWb6estWMLiiUiwwqwfNg26F2uj%2F9rgqODODyzXZRUk3duFzUR5pGgwmbPix%2BF8On5%2BGk0nkWI25FB3tj8mTo1BznQtE7xxTchnBljxdo0onHvGkpduGRCZbE0dm%2BWkuPUrJBTuShdPik3CsAyxAynZsyqigawLKwoYx1bdJqBQ5HYoW6cA0Rb1DIFDK1admIolhLV%2Bw3JqjZYbT7usFeh1x91Jf%2Fh4juHYLvB40sbYGyMH0auYT5UKzKeAQ%2FNJ8qXspxXYL7dW0DW7nMJYbmkbvo%2BW2YXJbgK4Q%2FQ7Tzc1kfsh6vH0YJeqNthHGZdNJdWIZ3%2Bky5JmQW6fUjKDBLGlgETIwuFD84BPc0ZiU8QbsoRvrI0i1oIaxIL0GH0dWj1lVa3AqJGMQNug6DU73iJDix5mGAUbSYBKlbUMqGLqj1SE8xSt0sycU6S0c%2BSSJ41wHQ4UBbiLp%2F1%2BKOoXoBKthEq%2BPj3NAi%2Fw8DycP53DJBxpY2PB4o3MpjBsZLl8xzDUcWz2OHEg5tC7osBBpsl19Ahk4zUWgT4OYI%2Bvb7DiWq%2BhDd5iHhFtiMaJj0%2BDvXzXl9LUHWgC0OlkwKCch1Wh5S7XAq9WPrwImFofmdcq5LBTKUy9JoXFPm%2Bfy380CmvXSGFBBPttyIPZl5eX5ufptNd9bPan90zwNGX%2F5sPHbzxKAqPZH0dwrTcJjvNbS8kg5e5Mgrs8o0lFh6TaKa1CalJPja5KvNV1uKn1Xm7Kx2mtTr3cpEg1ktMA%2BZSgxYZCPzDBrw30KU9ufORaPPLiSAx%2BF8hlv13bwgTRtfPHUZVUcnpIgjENRCeRj0NWRcH8WWR1OvEcJxTlmoSS5wFdfSehSGqOmU4kFLboxj5VTYC8dMD5fqIBJ5AJNVYLoMoD%2BCoBpP8vANSS6gFQvp9aABSdWGtxdy9wwQNuSJhjYIlPky%2Bjyfe%2FznFlvEEf25gEWQUAXe%2F3C1wXxV5KGji%2FGfYRRZiXLjCl2GEV7FxB7AoPfGNq%2F%2BANtZEL%2B%2FGbBt9GK2TbqYH1gz8mZ%2F4e%2F4SpEr3dlnoKK7GIYSKYTMfFLkyJB4gw7eGwXEz4BhLKopcOmUvEha2zs%2FgLT9OFdIvJT7%2B5hYu%2F%2FXDhK7mj7ZTsidTeloB2uLljYeVXtHLRHe0NyTckH0Gy0pKaJUeOK4K5zlverufZDEyBSRJQ36B8cShXCWO9dZyROwXR1sE7SHUYLopNL3aSNtiZ0vDhp%2Fv9%2FGHMT8wwADVLTbAJb9RcC54pJsEXGpfh5Y5WxMv1YrrOq%2BsDTM8IcoxgjW6Y%2FpCYzkXNHfX6gO4UALqmC4Tjr3LicHr8pqFdvOzXufuWQOudVw35hzkJ5L9oufTtN6gaDsWvJ6DZURtvvgkXfLPy7u9feO6CH8BEJ8%2FjMC15b7vB9HdhKtfohp%2F94Iw%2FgK%2BIweDmcy%2Fvc71lVSGkmsGpcqK7ze%2BLE7wtyyYfB4cwTz6xVob%2FAQ%3D%3D
+
+==============================================================================
+
+==============================================================================
+Explanations for the task:
+
+1. Additional Servers: We add two more servers to distribute the load and reduce the risk of a single point of failure (SPOF). If one server fails, the other can still serve the users.
+
+2. Load Balancer (HAproxy): The load balancer distributes incoming network traffic across multiple servers to ensure no single server bears too much demand. This increases the availability and reliability of applications.
+
+3. Distribution Algorithm: The load balancer could be configured with a round-robin algorithm, which circulates the network load evenly to each server in turn. If all servers are functioning, this algorithm works well.
+
+4. Active-Active vs Active-Passive Setup: In an Active-Active setup, traffic is distributed to all servers simultaneously. All servers are running and can handle requests. In an Active-Passive setup, the passive server only starts if the active server fails. In our case, we’re using an Active-Active setup to maximize resource usage.
+
+5. In a Primary-Replica (Master-Slave) setup, the primary database handles all write operations and optionally some or all read operations. The replica databases are read-only and replicate from the primary to ensure the same data is available more widely. This setup can improve performance and availability.
+
+6. Primary vs Replica Node: The primary node handles write operations and updates the replica nodes. The replica nodes are read-only and used for read operations, which can help balance the load.
+
+==============================================================================
+Setup has the following issues:
+
+1. Single Point of Failure (SPOF): The load balancer itself can become a SPOF. To avoid this, a second load balancer can be added.
+
+2. Security Issues: Without a firewall or HTTPS, the data is not encrypted and the servers are exposed to potential attacks.
+
+3. No Monitoring: Without monitoring, it’s difficult to identify and troubleshoot issues promptly. It’s recommended to have some form of monitoring and alerting in place.
+
