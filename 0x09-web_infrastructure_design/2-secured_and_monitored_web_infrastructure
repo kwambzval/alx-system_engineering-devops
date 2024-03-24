@@ -1,0 +1,26 @@
+Link to the design for a three server web infrastructure that hosts the website www.foobar.com, it must be secured, serve encrypted traffic, and be monitored.
+=================================================================================
+https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=2-secured_and_monitored_web_infrastructure.drawio#R7Zpdb5swFIZ%2FTaTtohWEQMllmmzrpG6rlE5tdzM54ZRYBcyMach%2B%2FY7BDpDQpqkY3SRy0dqv7WP78BzijwysaZh94iRefWEeBIOh4WUDazYY4se08J9UNoViDm2zUHxOPaWVwpz%2BBiUaSk2pB0mtomAsEDSui0sWRbAUNY1wztb1avcsqPcaEx%2F2hPmSBPvqDfXEqlBd2yj1C6D%2BSvdsGqokJLqyEpIV8di6IlkfBtaUMyaKVJhNIZDe034p2n18onQ7MA6ReEmDh4sfXnYL343ru%2Fm3R3Hp%2B9erE9MpzDySIFUzVqMVG%2B0CiLyJ9CTmIhaheL4SYYA5E5OcpZEHsgsDc5BRcSvTp7bK3eW58UhlZ1ml5mxTyVwBpyEI4FqLBN9UbMnsXbWsNJXnNtXcrrFiTuDtPevSeUpKWMqX8IzHXAUh4T6IZ%2BqNt48YgwMYjoZvsN26hEgztKrwozUOARH0sT5colj2t%2Ba2PVwxihMZGirwLEvZUWF3pqnUJoppqlZVaHYNuXVDjr1jqPDDniFMVKZdSjmTx%2FBptcvnE1CZr4HqCdiPJr1FOJ0Xwmn%2BS3BaZy3BaQ07hnPYw3kEnPrr%2BxCc9lvC6dSRGr2WTdPcMdQ1mw1oOgH66nyBCV%2Fkj7YQ7lk%2B8BJa51fKdMFJki%2FJJljBtOOsaKbKtaGPlMOayDEVBnHAhc16PyhX%2Bt6JE9lgygLG86xlGI4znWLFR%2BCC4nJsElA%2FwjLB4op6SRYQXLGECspk6YIJwUKsEOwULJFWyfQ5UXa2QiUcWSoCGsF0u5SUAXBPg6AysGn%2BQT0RnD1ApcRxXfPcwhKfE49COR0V91qeobeWalgR45JpZUwvMIdSWZFYuibMfLmyPo1ArBl%2FSE7vtbO1E6UvIHs%2BOvejSb9CHaeGqal5r0Sbabr74bbluym0ajAfS67dk9uT%2Bwpy3xzcpq1UD24P7gFwt8vhtyPX7ZDcG0Cbxhw4OhET775%2B%2Bvz19n3PcQccr2HxMykc3w7JZ1aNZGfUQLJhN5CsxdZJHndI8iSOAyQpfx4l0T3Hf53jVhneOUNwG9YR44btprl7otYawnoAnTA8I4IsSAI9t11wKxjPrxvaefnaNXDHTTs3o1tyuzx0uGTEw3KkgkTLYilxMYk5y6SPTuQLeX6Jf6%2BBhzTSL2kSyTaqqUfx2dFFKsv6BUgnAZDGwJcsjFPR3hqkHgYj9%2B3DYNQQBq3fqQ3aulB71fHyoMVj4ZeeCzvNIPSXFsfR2XS%2B1l9aHNgaH75R%2B6eu1P7f%2B96mDVxP56G9wv%2F1awT86m0Jz3FreGK2%2FClOUb38RZP14Q8%3D
+=================================================================================
+
+=================================================================================
+Explanations for the task:
+
+1. Firewalls: Firewalls are added for security. They control the incoming and outgoing network traffic based on predetermined security rules and establish a barrier between a trusted, secure internal network and another outside network such as the Internet.
+
+2. SSL Certificate: The SSL certificate is used to serve traffic over HTTPS, which encrypts the data sent between the user’s browser and the server. This prevents attackers from reading or modifying the data.
+
+3. Monitoring Clients: Monitoring clients are added to each server to collect data about the server’s performance and send it to a monitoring service like Sumologic. This helps in identifying any potential issues or bottlenecks.
+
+4. Monitoring Web Server QPS: If you want to monitor your web server’s Queries Per Second (QPS), you can configure your monitoring tool to collect this data. This can help you understand the load on your web server and identify when you might need to scale up.
+
+=================================================================================
+However, this has some issues:
+
+1. Terminating SSL at Load Balancer: If SSL is terminated at the load balancer, then the traffic between the load balancer and the servers is not encrypted. This could be a potential security risk if the internal network is compromised.
+
+2. Single MySQL Server for Writes: Having only one MySQL server capable of accepting writes is a potential bottleneck. If there are a lot of write operations, this server could become overloaded. Also, if this server goes down, all write operations would fail.
+
+3. Same Components on All Servers: Having the database, web server, and application server on all servers might not be the most efficient use of resources. It could be more efficient to separate these components onto different servers based on the load they each handle.
+
+=================================================================================
