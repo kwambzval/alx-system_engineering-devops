@@ -1,0 +1,16 @@
+Link to the design for a three server web infrastructure that hosts the website www.foobar.com, it must be secured, serve encrypted traffic, and be monitored.
+=================================================================================
+https://viewer.diagrams.net/?tags=%7B%7D&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Task-3.drawio#R7Zttb9sqFMc%2FTaS7F6tsEzvJyzZZd69uN1WrtK2vJhKf2qi28TB52qcf2BA%2FxFXdznlYRd8U%2FsDh%2BPA7CIdkgKbx5iPDafiJ%2BhANHMvfDNBs4Dj2ZOKIf1LZKsVGw0IJGPGVVgp35Bco0VLqkviQ1TpySiNO0rq4oEkCC17TMGN0Xe%2F2QKP6rCkOYE%2B4W%2BBoX%2F1GfB4W6ti1Sv1fIEGoZ7Yt1RJj3VkJWYh9uq5I6MMATRmlvCjFmylEMno6LsW46ydad44xSHiXAT%2B%2B3Hy6Ce9Xj8H%2Fv9bXo%2Buv8Bi%2FV1ZWOFqqBx44XiTsXc1FIZAFLTxQMY94DL5VsfF%2BLqlueJ%2FlK3cpOthuuimGqXZt6JowWGPpU2FQuFrYrM8j5MrcTm1KRw6Y0oiyvIosy%2FOmU9FxBYwTsWqXEQkS0cZpWlFv8ByiW5oRTqhsnVPOaSw6RI2GhYglCNtXWNnZCSGPI1G3RZEueUQSmO6Is2QQSBRVHJvmf0LPOKOPUGnxxmP7ComWgGGfQPk4CU2gIs9EtBbKrYQyCZMypjl0pBLiVIYm3gQyAS8S4GvKHrOLBx1sHUQZC9g8yY69I1LkMtAYONuKLnqAhlil8VhV12VK2Dolwmo6DJWIVRoGO9MlqaKgYH0BuI4B14D7PLju6NzARUcE94ZiX7QLKHCyEDQYfg%2FPb7ZMgS1onC4L%2F3vZfd0axK0UD9sodg9F8dBQbCh%2B6VZ8dhS7R6T4Gwib1h2wlUTYErGy%2Fvn88b%2FP398ZoI8A9BrmP7Ii%2BAc5EQ8nXU8WnnMgmr3T0ewYmv9qmpvH5DOgeXREmi%2FTtLE3G4YPf8ToczdGdX5Hdgu%2F6KjveePT8eu8iN9C88mqKfXv584ya3Gpq6dCqzlr8u%2F0%2BeeOzy7%2FtAdHScAZ5niOM3h9FhqKX0kxpyy%2FwukHY%2Bei%2FpI6QS0g649jaiCjg4F8zDuaNpDNceivA9lGeyA7pwe57c6mgQsk%2FqW8tS3D6%2BMsBF%2BtZGVRpX6LuVjsJFccC7UGnNFl4ucG5KrDhvDvsizCU9TulT1Znm0q3WbbSuUWGBFRkGQVWiIiUjEkq%2FfVttJUXttWa01jRRTA37uJbiy3iBRdsgU8%2F9bEMQuAP7up7PNToaPtdU9rDCLMyarubxswaoZbSvKNSe%2Bzdv244NkN5ornVKNK7PYNeXVDu7o2VARiz1DO7%2B6x%2FwDpttscg3SvSOtvfTyHNDol0ajxAQpq7qJdiUaTxicxzpGJbrvZMUT3SjTqSLRr9ug%2BiG675TkLoq2LyfDNQO12hHpkoO4D6rbLnrOA%2Bu1s005HooeG6D6IbrvwMUT3SvSwI9GeIboPotuugM6C6Dd18PA6Qj02UPcB9eQMoH6CRPs1JD6RIS9Ojx6J1mwYpP8QaVEtf19TdC9%2FpoQ%2B%2FAY%3D
+=================================================================================
+
+=================================================================================
+Explanations for the task:
+
+1. Additional Server: We add an additional server to host the new HAproxy load balancer. This helps distribute the load and reduce the risk of a single point of failure (SPOF).
+
+2. Load Balancer (HAproxy): The load balancer is configured as a cluster with the other one to distribute incoming network traffic across multiple servers. This ensures no single server bears too much demand, increasing the availability and reliability of applications.
+
+3. Split Components: The web server (Nginx), application server, and database (MySQL) are each hosted on their own server. This separation of concerns allows each component to be scaled, maintained, and managed independently, improving the overall performance and reliability of the system.
+
+=================================================================================
+
