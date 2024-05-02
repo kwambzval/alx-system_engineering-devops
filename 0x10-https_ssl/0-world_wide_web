@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# This script displays information about subdomains
+
+# Function to get record information
+get_record_info() {
+    local domain=$1
+    local subdomain=$2
+
+    # Use dig command to get the record information
+    local record_info=$(dig +short ${subdomain}.${domain})
+
+    # Use awk to get the record type
+    local record_type=$(echo ${record_info} | awk '{print $4}')
+
+    # Use awk to get the destination
+    local destination=$(echo ${record_info} | awk '{print $5}')
+
+    echo "The subdomain ${subdomain} is a ${record_type} record and points to ${destination}"
+}
+
+# Check if domain is provided
+if [ -z "$1" ]; then
+    echo "Please provide a domain."
+    exit 1
+fi
+
+# Check if subdomain is provided
+if [ -z "$2" ]; then
+    # Display information for default subdomains
+    for subdomain in www lb-01 web-01 web-02; do
+        get_record_info $1 $subdomain
+    done
+else
+    # Display information for specified subdomain
+    get_record_info $1 $2
+fi
+
