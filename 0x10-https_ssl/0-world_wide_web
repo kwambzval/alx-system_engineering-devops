@@ -7,13 +7,13 @@ get_record_info() {
     local subdomain=$2
 
     # Use dig command to get the record information
-    local record_info=$(dig +short ${subdomain}.${domain})
+    local record_info=$(dig ${subdomain}.${domain} +noall +answer)
 
     # Use awk to get the record type
     local record_type=$(echo ${record_info} | awk '{print $4}')
 
     # Use awk to get the destination
-    local destination=$(echo ${record_info} | awk '{print $5}')
+    local destination=$(echo ${record_info} | awk '{print $NF}')
 
     echo "The subdomain ${subdomain} is a ${record_type} record and points to ${destination}"
 }
