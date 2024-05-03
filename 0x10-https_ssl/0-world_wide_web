@@ -1,40 +1,40 @@
-#!/usr/bin/env bash
-# This script displays information about subdomains
+#!/bin/bash
 
-# Function to get record information
-get_record_info() {
-    local domain=$1
-    local subdomain=$2
-    local record_info
+# Function to display subdomain information
+display_subdomain_info() {
+    local domain="$1"
+    local subdomain="$2"
     local record_type
     local destination
 
-    # Use dig command to get the record information
-    record_info=$(dig "${subdomain}.${domain}" +noall +answer)
+    # Retrieve DNS information for the subdomain
+    dns_info=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION:/ { getline; print $4, $5 }')
 
-    # Use awk to get the record type
-    record_type=$(echo "${record_info}" | awk '{print $4}')
+    # Extract record type and destination
+    record_type=$(echo "$dns_info" | awk '{print $1}')
+    destination=$(echo "$dns_info" | awk '{print $2}')
 
-    # Use awk to get the destination
-    destination=$(echo "${record_info}" | awk '{print $NF}')
-
-    echo "The subdomain ${subdomain} is a ${record_type} record and points to ${destination}"
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
-# Check if domain is provided
-if [ -z "$1" ]; then
-    echo "Please provide a domain."
-    exit 1
-fi
-
-# Check if subdomain is provided
-if [ -z "$2" ]; then
+# Main script
+if [ $# -eq 0 ]; then
     # Display information for default subdomains
-    for subdomain in www lb-01 web-01 web-02; do
-        get_record_info "$1" "$subdomain"
-    done
-else
+    display_subdomain_info "holberton.online" "www"
+    display_subdomain_info "holberton.online" "lb-01"
+    display_subdomain_info "holberton.online" "web-01"
+    display_subdomain_info "holberton.online" "web-02"
+elif [ $# -eq 1 ]; then
+    # Display information for specified domain
+    display_subdomain_info "$1" "www"
+    display_subdomain_info "$1" "lb-01"
+    display_subdomain_info "$1" "web-01"
+    display_subdomain_info "$1" "web-02"
+elif [ $# -eq 2 ]; then
     # Display information for specified subdomain
-    get_record_info "$1" "$2"
+    display_subdomain_info "$1" "$2"
+else
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
 fi
 
