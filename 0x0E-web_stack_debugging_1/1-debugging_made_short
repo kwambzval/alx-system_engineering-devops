@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# This script starts nginx and ensures it's running
+service nginx start
+service nginx status
+
