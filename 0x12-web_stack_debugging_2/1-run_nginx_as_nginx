@@ -5,15 +5,15 @@
 apt-get update
 apt-get install -y nginx
 
+# Ensure the nginx user exists
+id -u nginx &>/dev/null || useradd -r nginx
+
 # Change Nginx configuration to listen on port 8080
 sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
 sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:8080 default_server;/' /etc/nginx/sites-available/default
 
 # Set the user to nginx in the Nginx configuration
 sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
-
-# Ensure the nginx user exists
-id -u nginx &>/dev/null || useradd -r nginx
 
 # Give proper permissions to the nginx user
 chown -R nginx:nginx /var/lib/nginx
@@ -22,4 +22,9 @@ chown -R nginx:nginx /var/www/html
 
 # Restart Nginx to apply the changes
 systemctl restart nginx
+
+# Verify the changes
+echo "Verification:"
+ps aux | grep ngin[x]
+ss -tuln | grep :8080
 
