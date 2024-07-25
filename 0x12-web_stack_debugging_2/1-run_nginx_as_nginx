@@ -25,6 +25,6 @@ systemctl restart nginx
 
 # Verify the changes
 echo "Verification:"
-ps aux | grep ngin[x]
+pgrep -u nginx -a nginx
 ss -tuln | grep :8080
 
