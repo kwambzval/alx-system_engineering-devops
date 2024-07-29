@@ -9,8 +9,8 @@ Usage:
     python3 script_name.py
 """
 
-import requests
 import json
+import requests
 
 
 def fetch_data(api_url):
